@@ -1,0 +1,19 @@
+import time #导入时间模块一会设置延迟时间
+
+from selenium import webdriver 
+driver = webdriver.Chrome()# 打开chrome，如果用Firefox,换成webdriver.Firefox()
+driver.maximize_window()# 最大化浏览器窗口
+driver.implicitly_wait(8)# 设置隐式时间等待
+driver.get("https://www.baidu.com")# 地址栏输入百度地址
+# driver.find_element_by_xpath("//*[@id='kw']").send_keys("boss直聘")
+driver.find_element_by_id("kw").send_keys("boss直聘")# 搜索输入框输入boss
+# driver.find_element_by_xpath("//*[@id='su']").click()
+driver.find_element_by_id("su").click()#点击百度一下按钮
+time.sleep(2)# 导入time模块，等待2秒
+
+# 我通过元素XPath表达式来确定该元素显示在结果列表，从而判断boss直聘官网这个链接显示在结果列表。
+ele_string=driver.find_element_by_xpath("//*[@id='1']/h3/a/em").text
+if(ele_string =="BOSS直聘"):
+print("Testing is successful!")
+
+driver.quit()
